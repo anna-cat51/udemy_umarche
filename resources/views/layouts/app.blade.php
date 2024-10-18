@@ -23,7 +23,7 @@
             @elseif(request()->is('owner*'))
                 @include('layouts.owner-navigation')
             @else
-                @include('layouts.user-navigation')
+                @include('layouts.navigation')
             @endif
 
             <!-- Page Heading -->
