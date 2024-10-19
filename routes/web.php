@@ -28,6 +28,7 @@ Route::get('/dashboard', function () {
 Route::get('/conponent-test1', [ComponentTestController::class, 'showConponent1']);
 Route::get('/conponent-test2', [ComponentTestController::class, 'showConponent2']);
 Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
+Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
 
 
 
