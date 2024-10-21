@@ -27,6 +27,6 @@ class CreateOwnerPasswordResets extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('owner_password_rests');
+        Schema::dropIfExists('owner_password_resets');
     }
 }
