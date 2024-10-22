@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\shop;
+use App\Models\Shop;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -24,8 +24,7 @@ class ShopController extends Controller
             if(!is_null($id)){
                 $shopsOwnerId = Shop::findOrFail($id)->owner->id;
                 $shopId = (int)$shopsOwnerId;
-                $ownerId = Auth::id();
-                if($shopId !== $ownerId){
+                if($shopId !== Auth::id()){
                     abort(404);
                 }
             }
