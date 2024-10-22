@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use App\Http\Requests\UploadImageRequest;
+use App\Services\ImageService;
 
 class ShopController extends Controller
 {
@@ -52,22 +53,7 @@ class ShopController extends Controller
     {
         $imageFile = $request->image; //一時保存
         if(!is_null($imageFile) && $imageFile->isValid() ){
-            // Storage::putFile('public/shops', $imageFile) リサイズなし
-            // ImageManagerをインスタンス化する
-            $manager = new ImageManager(new Driver());
-            // 画像を読み込む
-            $image = $manager->read($imageFile->getPathname());
-            // 重複しないファイル名をつくる
-            $fileName = uniqid(rand().'_');
-            // 拡張子を取得
-            $extension = $imageFile->extension();
-            // 上記のファイル名と拡張子を合体
-            $fileNameToStore = $fileName. '.' .$extension;
-
-            $resizedImage = $image->resize(1920, 1080)->encode();
-
-            // dd($manager, $image, $fileName, $extension, $resizedImage);
-            Storage::put('public/shops/' . $fileNameToStore, $resizedImage );
+            $fileNameToStore = ImageService::upload($imageFile, 'shops');
         }
         return redirect()->route('owner.shops.index');
     }
