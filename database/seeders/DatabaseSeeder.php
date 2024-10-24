@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Owner;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +19,10 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             OwnerSeeder::class,
             ShopSeeder::class,
-            ImageSeeder::class
+            ImageSeeder::class,
+            CategorySeeder::class,
+            // ProductSeeder::class,
+            // StockSeeder::class,
         ]);
     }
 }
