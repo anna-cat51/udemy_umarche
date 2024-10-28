@@ -71,8 +71,8 @@
                             </select>
                         </div>
                         </div>
-                        <button class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">カートに入れる</button>
-                      <input type="hidden" name="puroduct_id" value="{{  $product->id }}">
+                        <button class="flex ml-auto text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded">カートに追加</button>
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                       </form>
                       </div>
                     </div>
