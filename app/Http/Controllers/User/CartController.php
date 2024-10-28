@@ -45,7 +45,8 @@ class CartController extends Controller
         return redirect()->route('user.cart.index');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         Cart::where('product_id', $id)
         ->where('user_id', Auth::id())
         ->delete();
@@ -53,23 +54,31 @@ class CartController extends Controller
         return redirect()->route('user.cart.index');
     }
 
-    public function checkout(){
+    public function checkout()
+    {
         $user = User::findOrFail(Auth::id());
         $products = $user->products;
 
         $lineItems = [];
         foreach($products as $product){
             $quantity = '';
-            $quantity = Stock::where('product_id', $product->id)->sum('quantity');
+            $quantity = Stock::where('product_id', $product->id)
+            ->sum('quantity');
 
             if($product->pivot->quantity > $quantity){
                 return view('user.cart.index');
             }else{
-                $lineItem = [
-                    'name' => $product->name,
-                    'description' => $product->information,
-                    'amount' => $product->price,
+                $price_data = ([
+                    'unit_amount' => $product->price,
                     'currency' => 'jpy',
+                    'product_data' => $product_data = ([
+                        'name' => $product->name,
+                        'description' => $product->information,
+                    ]),
+                ]);
+
+                $lineItem = [
+                    'price_data' => $price_data,
                     'quantity' => $product->pivot->quantity,
                 ];
                 array_push($lineItems, $lineItem);
@@ -83,8 +92,6 @@ class CartController extends Controller
                 'quantity' => $product->pivot->quantity * -1
             ]);
         }
-
-        dd('test');
 
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
