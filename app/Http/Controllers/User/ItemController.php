@@ -32,11 +32,11 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        dd($request);
         $categories = PrimaryCategory::with('secondary')
         ->get();
 
         $products = Product::availableItems()
+        ->selectCategory($request->category ?? '0')
         ->sortOrder($request->sort)
         ->paginate($request->pagination ?? '20');
 
