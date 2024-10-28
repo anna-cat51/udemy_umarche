@@ -5,6 +5,7 @@ use App\Http\Controllers\ComponentTestController;
 use App\Http\Controllers\LifeCycleTestController;
 use App\Http\Controllers\User\ItemController;
 use App\Http\Controllers\User\CartController;
+use App\Models\Cart;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::prefix('cart')->
         Route::get('/', [CartController::class, 'index'])->name('cart.index');
         Route::post('add', [CartController::class, 'add'])->name('cart.add');
         Route::post('delete/{item}', [CartController::class, 'delete'])->name('cart.delete');
+        Route::get('checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     });
 
 // Route::get('/dashboard', function () {
